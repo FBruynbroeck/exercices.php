@@ -18,23 +18,34 @@
 
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Menu1 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Menu2</a>
-                    </li>
+                    <li class="nav-item"><a class="nav-link" href="#">Menu1</a></li>
+<?php
+if(!empty($_SESSION['login']))
+{
+    echo '<li class="nav-item"><a class="nav-link" href="admin.php">Menu d\'administration</a></li>';
+}
+?>
                 </ul>
-                <form class="form-inline my-2 my-lg-0" action="login">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Se connecter</button>
-                </form>
+<?php
+if(empty($_SESSION['login'])){
+    echo '<a href="login.php" class="btn btn-outline-success my-2 my-sm-0">Se connecter</a>';
+}
+else {
+    echo '<a href="logout.php" class="btn btn-outline-success my-2 my-sm-0">Se déconnecter</a>';
+}
+?>
             </div>
         </nav>
         <main role="main" class="container">
-            <div class="jumbotron">
-                <h1><?php echo $titre; ?></h1>
-                <?php echo $contenu; ?>
-            </div>
+<?php
+if(!empty($errorMessage)){
+    include('error.php');
+}
+?>
+        <div class="jumbotron">
+            <h1><?php echo $titre; ?></h1>
+            <?php echo $contenu; ?>
+        </div>
         </main>
         <footer class="footer">
             <div class="container">
