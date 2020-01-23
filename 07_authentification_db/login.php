@@ -18,7 +18,8 @@ if(!empty($_POST)) {
             //die — Alias de la fonction exit qui affiche un message et termine le script courant
             die('Erreur : ' . $e->getMessage());
         }
-        $reponse = $bdd->query('SELECT * FROM USER WHERE login = "'.$_POST['login'].'"');
+        $reponse = $bdd->prepare('SELECT * FROM USER WHERE login = :login');
+        $reponse->execute([':login' => $_POST['login']]);
         $user = $reponse->fetch();
         $reponse->closeCursor(); // Termine le traitement de la requête
         //Ici on va vérifier si le login/pass est bon
