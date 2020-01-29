@@ -28,6 +28,7 @@ if(!empty($_SESSION['login']))
                 </ul>
 <?php
 if(empty($_SESSION['login'])){
+    echo '<a href="signup.php" class="btn btn-outline-secondary my-2 my-sm-0">S\'inscrire</a>';
     echo '<a href="login.php" class="btn btn-outline-success my-2 my-sm-0">Se connecter</a>';
 }
 else {
