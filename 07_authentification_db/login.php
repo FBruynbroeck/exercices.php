@@ -27,6 +27,7 @@ if(!empty($_POST)) {
         {
             //Authentification OK
             $_SESSION['login'] = $_POST['login'];
+            $_SESSION['message'] = "Bienvenue ".$_POST['login'];
             header("Location: index.php");
             exit();
         }
