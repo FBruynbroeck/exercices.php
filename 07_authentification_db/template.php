@@ -32,6 +32,7 @@ if(empty($_SESSION['login'])){
     echo '<a href="login.php" class="btn btn-outline-success my-2 my-sm-0">Se connecter</a>';
 }
 else {
+    echo '<a href="account.php" class="btn btn-outline-info my-2 my-sm-0">Mon compte</a>';
     echo '<a href="logout.php" class="btn btn-outline-success my-2 my-sm-0">Se déconnecter</a>';
 }
 ?>
@@ -41,6 +42,10 @@ else {
 <?php
 if(!empty($errorMessage)){
     include('error.php');
+}
+if(!empty($_SESSION['message'])){
+    include('message.php');
+    unset($_SESSION['message']);
 }
 ?>
         <div class="jumbotron">
