@@ -17,9 +17,18 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 $reponse = $bdd->prepare('SELECT * FROM USER WHERE login = :login');
-$reponse->execute([':login' => $_SESSION['login']]);
+if(!empty($_GET) && !empty($_GET['login'])){
+    $reponse->execute([':login' => $_GET['login']]);
+}
+else {
+    $reponse->execute([':login' => $_SESSION['login']]);
+}
 $user = $reponse->fetch();
 $reponse->closeCursor(); // Termine le traitement de la requête
+
+if($user['login'] != $_SESSION['login']) {
+    $titre = "Utilisateur ".$user['login'];
+}
 
 
 $email = $user['email'];
@@ -38,7 +47,7 @@ Login: <?= $user['login']?>
 <br>
 Email: <?= $user['email']?>
 <br>
-<a href="edit.php" class="btn btn-warning">Editer</a>
+<a href="edit.php?login=<?= $user['login']?>" class="btn btn-warning">Editer</a>
 <?php
 $contenu = ob_get_clean();
 include('template.php');
