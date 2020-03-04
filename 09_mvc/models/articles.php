@@ -25,4 +25,15 @@ function getArticles() {
     return $data;
 }
 
+function getArticle($nom) {
+    $articles = getArticles();
+    foreach($articles as $article) {
+        if (strtolower($nom) == strtolower($article['nom'])) {
+            return $article;
+        }
+    }
+}
+
+
+
 ?>
