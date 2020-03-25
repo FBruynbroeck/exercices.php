@@ -20,9 +20,25 @@
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a class="nav-link" href="<?=ROOT_PATH?>article">Les articles</a></li>
                 </ul>
+                <?php if(empty($_SESSION['id'])):?>
+                    <a href="<?=ROOT_PATH?>login" class="btn btn-outline-success my-2 my-sm-0">Se connecter</a>
+                <?php else:?>
+                    <a href="<?=ROOT_PATH?>user" class="btn btn-outline-info my-2 my-sm-0">Mon compte</a>
+                    <a href="<?=ROOT_PATH?>logout" class="btn btn-outline-success my-2 my-sm-0">Se déconnecter</a>
+                <?php endif?>
             </div>
         </nav>
         <main role="main" class="container">
+<?php
+if(!empty($_SESSION['message'])){
+    include 'message.php';
+    unset($_SESSION['message']);
+}
+if(!empty($_SESSION['error'])){
+    include 'error.php';
+    unset($_SESSION['error']);
+}
+?>
         <div class="jumbotron">
             <h1><?php echo $title; ?></h1>
             <?php echo $content; ?>
